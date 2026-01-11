@@ -1,38 +1,20 @@
 # Git 使用手册
 
+## 安装 Git
+
+如果您还未安装 Git，请参阅 **[Git 安装手册](INSTALL.md)**，其中包含：
+- Windows、macOS、Linux 系统的详细安装步骤
+- 多种安装方法（官方安装包、包管理器等）
+- 初始配置指南
+- 常见问题解决方案
+
+---
+
 ## 目录
-- [Windows 安装](#windows-安装)
 - [基础操作](#基础操作)
 - [分支管理](#分支管理)
 - [远程操作](#远程操作)
 - [进阶用法](#进阶用法)
-
----
-
-## Windows 安装
-
-### 下载安装
-1. 访问 Git 官网：https://git-scm.com/download/win
-2. 下载适合您系统的安装包（32位或64位）
-3. 运行安装程序，建议配置：
-   - 选择 "Git from the command line and also from 3rd-party software"
-   - 选择 "Use the OpenSSL library"
-   - 选择 "Checkout Windows-style, commit Unix-style line endings"
-   - 选择 "Use MinTTY (the default terminal of MSYS2)"
-   - 勾选 "Enable file system caching"
-
-### 初始配置
-安装完成后，打开 Git Bash，配置用户信息：
-
-```bash
-git config --global user.name "你的名字"
-git config --global user.email "your.email@example.com"
-```
-
-查看配置：
-```bash
-git config --list
-```
 
 ---
 
