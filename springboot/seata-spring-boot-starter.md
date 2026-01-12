@@ -359,6 +359,51 @@ public class Order {
 }
 ```
 
+#### Storage 实体类
+
+```java
+package com.example.storage.entity;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+
+@Data
+@TableName("t_storage")
+public class Storage {
+    @TableId(type = IdType.AUTO)
+    private Long id;
+    private Long productId;
+    private Integer total;
+    private Integer used;
+    private Integer residue;
+}
+```
+
+#### Account 实体类
+
+```java
+package com.example.account.entity;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+import java.math.BigDecimal;
+
+@Data
+@TableName("t_account")
+public class Account {
+    @TableId(type = IdType.AUTO)
+    private Long id;
+    private Long userId;
+    private BigDecimal total;
+    private BigDecimal used;
+    private BigDecimal residue;
+}
+```
+
 ### 3. Mapper 接口
 
 ```java
