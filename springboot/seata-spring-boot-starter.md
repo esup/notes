@@ -344,6 +344,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import java.math.BigDecimal;
 
 @Data
 @TableName("t_order")
@@ -628,6 +629,12 @@ public void businessMethod() {
 
 **使用方式：**
 ```java
+import io.seata.rm.tcc.api.BusinessActionContext;
+import io.seata.rm.tcc.api.BusinessActionContextParameter;
+import io.seata.rm.tcc.api.LocalTCC;
+import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
+import java.math.BigDecimal;
+
 @LocalTCC
 public interface AccountTccService {
     
@@ -714,6 +721,15 @@ io.seata.common.exception.ShouldNeverHappenException: DataSourceProxy not found
 确保使用的数据源被 Seata 代理，配置数据源代理：
 
 ```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import javax.sql.DataSource;
+import com.alibaba.druid.pool.DruidDataSource;
+import io.seata.rm.datasource.DataSourceProxy;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+
 @Configuration
 public class DataSourceProxyConfig {
     
@@ -814,6 +830,17 @@ private void createOrderWithTransaction() {
 
 **示例：**
 ```java
+// 自定义业务异常类
+public class BusinessException extends RuntimeException {
+    public BusinessException(String message) {
+        super(message);
+    }
+    
+    public BusinessException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+
 @GlobalTransactional(rollbackFor = Exception.class)
 public void createOrder(Order order) {
     try {
@@ -855,6 +882,10 @@ seata:
 - 设置告警机制
 
 ```java
+import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @GlobalTransactional
 public void createOrder(Order order) {
